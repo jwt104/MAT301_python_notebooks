@@ -263,6 +263,11 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-9-1">
+   Example 9.1
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#midpoint-method">
    Midpoint method
   </a>
@@ -314,6 +319,11 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#euler-s-method">
    Euler’s method
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-9-1">
+   Example 9.1
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -396,7 +406,10 @@ S(t_{j+1}) = S(t_j) + (t_{j+1} - t_j)\frac{dS(t_j)}{dt},
 S(t_{j+1}) = S(t_j) + hF(t_j, S(t_j)).
 \]</div>
 <p>This formula is called the <strong>Explicit Euler Formula</strong>, and allows us to approximate the state at <span class="math notranslate nohighlight">\(S(t_{j+1})\)</span> given the state at <span class="math notranslate nohighlight">\(S(t_j)\)</span>. Starting from a given initial value of <span class="math notranslate nohighlight">\(S_0 = S(t_0)\)</span>, we can use this formula to integrate the states up to <span class="math notranslate nohighlight">\(S(t_f)\)</span>; these <span class="math notranslate nohighlight">\(S(t)\)</span> values are then an approximation for the solution of the differential equation. The Explicit Euler formula is the simplest and most intuitive method for solving initial value problems. At any state <span class="math notranslate nohighlight">\((t_j, S(t_j))\)</span> it uses <span class="math notranslate nohighlight">\(F\)</span> at that state to “point” toward the next state and then moves in that direction a distance of <span class="math notranslate nohighlight">\(h\)</span>. Although there are more sophisticated and accurate methods for solving these problems, they all have the same fundamental structure. As such, we enumerate explicitly the steps for solving an initial value problem using the Explicit Euler formula.</p>
-<img src="https://pythonnumericalmethods.berkeley.edu/_images/22.03.01-Euler-method-illustration.png" alt="explicit Euler" title="The illustration of the explicit Euler method." width="500"/><p>Lets go ahead and see this in action, using the equation and question posed in from Example 9.1 in the lectures:</p>
+<img src="https://pythonnumericalmethods.berkeley.edu/_images/22.03.01-Euler-method-illustration.png" alt="explicit Euler" title="The illustration of the explicit Euler method." width="500"/></div>
+<div class="section" id="example-9-1">
+<h2>Example 9.1<a class="headerlink" href="#example-9-1" title="Permalink to this headline">¶</a></h2>
+<p>To view this in action, we will make use of the equation and question posed in from Example 9.1 in the lectures:</p>
 <div class="math notranslate nohighlight">
 \[
 \frac{{\rm{d}}y}{{\rm{d}}t}=xy,
@@ -471,7 +484,7 @@ x= [0.  0.1 0.2 0.3 0.4 0.5]
 </div>
 </div>
 </div>
-<p>Our approximate solution seems to be behaving in the same way: lets visualise this with a plot:</p>
+<p>Our approximate solution seems to be behaving in a similar way (starting at one and growing with each step). To see how good an approximation Euler’s method produces, we’ll visualise both results with a plot:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;seaborn-poster&#39;</span><span class="p">)</span>
@@ -491,10 +504,10 @@ x= [0.  0.1 0.2 0.3 0.4 0.5]
 <img alt="_images/MAT301_DifferentialEquationSolving1_17_0.png" src="_images/MAT301_DifferentialEquationSolving1_17_0.png" />
 </div>
 </div>
-<p>So we see that our approximation displays similar behaviour, but doesn’t follow the trend exactly; in fact the graphs appear to be diverging as <span class="math notranslate nohighlight">\(x\)</span> increases. What if we make the step size ten times smaller?</p>
+<p>Our approximation displays similar behaviour, <em>but</em> doesn’t follow the trend exactly; in fact the graphs appear to be diverging as <span class="math notranslate nohighlight">\(x\)</span> increases. What if we make the step size ten times smaller?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">h2</span> <span class="o">=</span> <span class="mf">0.01</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">h2</span> <span class="o">=</span> <span class="mf">0.01</span> <span class="c1">#NEW step size</span>
 <span class="n">N2</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span> <span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="n">h2</span><span class="p">)</span> <span class="c1"># number of steps</span>
 <span class="n">x2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">+</span> <span class="n">h2</span><span class="p">,</span> <span class="n">h2</span><span class="p">)</span>  <span class="c1"># range of x</span>
 <span class="n">y2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x2</span><span class="p">))</span>
